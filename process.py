@@ -1,7 +1,7 @@
 import pandas as PANDA
 
 def pearsons_correlation(a, b):
-    return sum([a[i]*b[i] for i in range(len(a))])/Math.sqrt(sum([x*x for x in a])*sum([y*y for y in b]))
+    return sum([x*y for x,y in zip(a,b)])/Math.sqrt(sum([x*x for x in a])*sum([y*y for y in b]))
 
 data_frame = PANDA.read_csv('pima-data.csv')
 
