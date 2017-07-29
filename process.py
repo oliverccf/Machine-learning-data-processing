@@ -37,5 +37,5 @@ if __name__ == "__main__":
         map_diabetes = {True: 1, False: 0}
         data_frame['diabetes'] = data_frame['diabetes'].map(map_diabetes)
 
-        data_frame.to_csv('cleaned_data.csv', sep='\t', encoding='utf-8')
+        data_frame.to_csv('cleaned_data.csv', index=False, encoding='utf-8')
 
