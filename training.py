@@ -1,6 +1,8 @@
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import Imputer
 from sklearn.naive_bayes import GaussianNB
+from sklearn import metrics
+
 import pandas as PANDA
 
 
@@ -48,4 +50,9 @@ y_train = fill_zero.fit_transform(y_train)
 
 train_model = GaussianNB()
 train_model.fit(x_train, y_train.ravel())
+
+
+prediction_from_test_data = train_model.predict(x_test)
+accuracy = metrics.accuracy_score(y_test, prediction_from_test_data)
+print("Accuracy of our naive bayes model is: {0:0.4f}".format(accuracy))
 
