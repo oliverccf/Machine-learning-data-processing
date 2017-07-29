@@ -1,5 +1,6 @@
 import pandas as PANDA
 import matplotlib.pyplot as plt
+import math as Math
 
 
 def pearsons_correlation(a, b):
