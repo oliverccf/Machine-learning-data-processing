@@ -15,17 +15,27 @@ def corr_heatmap(data_frame, size=11):
     plt.show("heat map")
 
 
-data_frame = PANDA.read_csv('pima-data.csv')
+if __name__ == "__main__":
 
-if data_frame.isnull().values.any():
-    print('data isnt consistance....')
-else:
-    corr_heatmap(data_frame)
-    print("Enter column name to delete: ")
-    columns = input().split()
-    for column in columns:
-        del data_frame[column]
-        data_frame.head()
+    data_frame = PANDA.read_csv('pima-data.csv')
 
-    print('After Cleaning......')
-    corr_heatmap(data_frame)
+    if data_frame.isnull().values.any():
+        print("data isn't consistence....")
+    else:
+        corr_heatmap(data_frame)
+        print("Enter column name to delete: ")
+        columns = input().split()
+        for column in columns:
+            del data_frame[column]
+            data_frame.head()
+
+        print('After Cleaning......')
+        corr_heatmap(data_frame)
+
+        print(data_frame.head())
+
+        map_diabetes = {True: 1, False: 0}
+        data_frame['diabetes'] = data_frame['diabetes'].map(map_diabetes)
+
+        data_frame.to_csv('cleaned_data.csv', sep='\t', encoding='utf-8')
+
