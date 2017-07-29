@@ -1,4 +1,6 @@
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import Imputer
+from sklearn.naive_bayes import GaussianNB
 import pandas as PANDA
 
 
@@ -37,4 +39,13 @@ print("# rows missing insulin: {0}".format(len(data_frame.loc[data_frame['insuli
 print("# rows missing bmi: {0}".format(len(data_frame.loc[data_frame['bmi'] == 0])))
 print("# rows missing diab_pred: {0}".format(len(data_frame.loc[data_frame['diab_pred'] == 0])))
 print("# rows missing age: {0}".format(len(data_frame.loc[data_frame['age'] == 0])))
+
+
+fill_zero = Imputer(missing_values=0, strategy='mean', axis=0)
+
+x_train = fill_zero.fit_transform(x_train)
+y_train = fill_zero.fit_transform(y_train)
+
+train_model = GaussianNB()
+train_model.fit(x_train, y_train.ravel())
 
