@@ -13,21 +13,19 @@ feature_column_names = data_frame.columns[0:-1].values
 
 predicted_class_name = [data_frame.columns[-1]]
 
-print("feature column names: ", feature_column_names)
-
 x = data_frame[feature_column_names].values
 y = data_frame[predicted_class_name].values
 
-split_test_size = 30
+split_test_size = int((len(data_frame.index)*30)/100)
 
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=split_test_size, random_state=42)
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=split_test_size, random_state=53)
 
 
 print("{0:0.2f}% in training set".format((len(x_train)/len(data_frame.index)) * 100))
 print("{0:0.2f}% in test set".format((len(x_test)/len(data_frame.index)) * 100))
 
 
-print("# rows in dataframe {0}".format(len(data_frame)))
+print("# rows in data frame {0}".format(len(data_frame)))
 
 for column in feature_column_names:
     print("#rows missing in {0} : {1}".format(column, len(data_frame.loc[data_frame[column] == 0])))
