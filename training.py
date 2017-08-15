@@ -8,18 +8,10 @@ import pandas as PANDA
 
 data_frame = PANDA.read_csv('cleaned_data.csv')
 
-feature_column_names = [
-    'num_preg',
-    'glucose_conc',
-    'diastolic_bp',
-    'thickness',
-    'insulin',
-    'bmi',
-    'diab_pred',
-    'age'
-]
 
-predicted_class_name = ['diabetes']
+feature_column_names = data_frame.columns[0:-1]
+
+predicted_class_name = data_frame.columns[-1]
 
 x = data_frame[feature_column_names].values
 y = data_frame[predicted_class_name].values
