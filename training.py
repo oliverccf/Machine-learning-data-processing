@@ -18,14 +18,14 @@ y = data_frame[predicted_class_name].values
 
 split_test_size = int((len(data_frame.index)*30)/100)
 
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=split_test_size, random_state=53)
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=split_test_size, random_state=42)
 
 
 print("{0:0.2f}% in training set".format((len(x_train)/len(data_frame.index)) * 100))
 print("{0:0.2f}% in test set".format((len(x_test)/len(data_frame.index)) * 100))
 
 
-print("# rows in data frame {0}".format(len(data_frame)))
+print("# rows in dataframe {0}".format(len(data_frame)))
 
 for column in feature_column_names:
     print("#rows missing in {0} : {1}".format(column, len(data_frame.loc[data_frame[column] == 0])))
@@ -34,7 +34,7 @@ for column in feature_column_names:
 fill_zero = Imputer(missing_values=0, strategy='mean', axis=0)
 
 x_train = fill_zero.fit_transform(x_train)
-y_train = fill_zero.fit_transform(y_train)
+x_test = fill_zero.fit_transform(x_test)
 
 train_model = GaussianNB()
 train_model.fit(x_train, y_train.ravel())
