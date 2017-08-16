@@ -46,7 +46,8 @@ print("Accuracy of our naive bayes model is: {0:0.4f}".format(accuracy))
 
 
 print('Confusion Matrix')
-
 print("{0}".format(metrics.confusion_matrix(y_test, prediction_from_test_data, labels=[1, 0])))
 
 
+print("Classification Report")
+print("{0}".format(metrics.classification_report(y_test, prediction_from_test_data, labels=[1, 0])))
