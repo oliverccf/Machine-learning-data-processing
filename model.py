@@ -32,14 +32,18 @@ class BaseModel:
         for column in self.feature_column_names:
             print("#rows missing in {0} : {1}".format(column, len(self.data_frame.loc[self.data_frame[column] == 0])))
 
-    def get_predict_accuracy(self):
+    def get_predict_accuracy_on_test_data(self):
         prediction_from_test_data = self.train_model.predict(self.x_test)
         accuracy = metrics.accuracy_score(self.y_test, prediction_from_test_data)
-        print("Accuracy of our naive bayes model is: {0:0.4f}".format(accuracy))
+        print("Accuracy of our naive bayes model on test data is: {0:0.4f}".format(accuracy))
+
+    def get_predict_accuracy_on_train_data(self):
+        prediction_from_train_data = self.train_model.predict(self.x_train)
+        accuracy = metrics.accuracy_score(self.y_train, prediction_from_train_data)
+        print("Accuracy of our naive bayes model on training data is: {0:0.4f}".format(accuracy))
 
 
 class NaiveBais(BaseModel):
     def __init__(self, file_name=""):
         naive_bais = GaussianNB()
         super().__init__(file_name=file_name, train_model=naive_bais)
-
