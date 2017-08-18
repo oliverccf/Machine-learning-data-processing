@@ -3,6 +3,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import Imputer
 from sklearn.naive_bayes import GaussianNB
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
 from sklearn import metrics
 
 
@@ -54,3 +55,9 @@ class RandomForestClassifierModel(BaseModel):
     def __init__(self, file_name=""):
         random_forest_classifier_model = RandomForestClassifier(random_state=42)
         super().__init__(file_name=file_name, train_model=random_forest_classifier_model)
+
+
+class LogisticRegressionModel(BaseModel):
+    def __init__(self, file_name=""):
+        logistic_regression = LogisticRegression(random_state=42)
+        super().__init__(file_name=file_name, train_model=logistic_regression)
