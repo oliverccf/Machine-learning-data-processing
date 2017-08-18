@@ -2,6 +2,7 @@ import pandas as PANDA
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import Imputer
 from sklearn.naive_bayes import GaussianNB
+from sklearn.ensemble import RandomForestClassifier
 from sklearn import metrics
 
 
@@ -43,7 +44,13 @@ class BaseModel:
         print("Accuracy of our naive bayes model on training data is: {0:0.4f}".format(accuracy))
 
 
-class NaiveBais(BaseModel):
+class NaiveBayesModel(BaseModel):
     def __init__(self, file_name=""):
-        naive_bais = GaussianNB()
-        super().__init__(file_name=file_name, train_model=naive_bais)
+        naive_bayes = GaussianNB()
+        super().__init__(file_name=file_name, train_model=naive_bayes)
+
+
+class RandomForestClassifierModel(BaseModel):
+    def __init__(self, file_name=""):
+        random_forest_classifier_model = RandomForestClassifier(random_state=42)
+        super().__init__(file_name=file_name, train_model=random_forest_classifier_model)
