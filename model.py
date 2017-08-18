@@ -8,8 +8,9 @@ from sklearn import metrics
 
 
 class BaseModel:
-    def __init__(self, file_name="", train_model=None):
+    def __init__(self, file_name="", train_model=None, model_name='model'):
         self.file_name = file_name
+        self.model_name = model_name
         self.train_model = train_model
         self.data_frame = PANDA.read_csv(file_name)
         self.feature_column_names = self.data_frame.columns[0:-1].values
@@ -37,27 +38,28 @@ class BaseModel:
     def get_predict_accuracy_on_test_data(self):
         prediction_from_test_data = self.train_model.predict(self.x_test)
         accuracy = metrics.accuracy_score(self.y_test, prediction_from_test_data)
-        print("Accuracy of our naive bayes model on test data is: {0:0.4f}".format(accuracy))
+        print("Accuracy of our {1} on test data is: {0:0.4f}".format(accuracy, self.model_name))
 
     def get_predict_accuracy_on_train_data(self):
         prediction_from_train_data = self.train_model.predict(self.x_train)
         accuracy = metrics.accuracy_score(self.y_train, prediction_from_train_data)
-        print("Accuracy of our naive bayes model on training data is: {0:0.4f}".format(accuracy))
+        print("Accuracy of our {1} on training data is: {0:0.4f}".format(accuracy, self.model_name))
 
 
 class NaiveBayesModel(BaseModel):
     def __init__(self, file_name=""):
         naive_bayes = GaussianNB()
-        super().__init__(file_name=file_name, train_model=naive_bayes)
+        super().__init__(file_name=file_name, train_model=naive_bayes, model_name='Naive Bayes')
 
 
 class RandomForestClassifierModel(BaseModel):
     def __init__(self, file_name=""):
         random_forest_classifier_model = RandomForestClassifier(random_state=42)
-        super().__init__(file_name=file_name, train_model=random_forest_classifier_model)
+        super().__init__(file_name=file_name, train_model=random_forest_classifier_model, model_name='Random forest')
 
 
 class LogisticRegressionModel(BaseModel):
     def __init__(self, file_name=""):
         logistic_regression = LogisticRegression(random_state=42)
-        super().__init__(file_name=file_name, train_model=logistic_regression)
+        super().__init__(file_name=file_name, train_model=logistic_regression, model_name='Logistic Regression')
+
