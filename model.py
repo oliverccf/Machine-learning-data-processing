@@ -38,13 +38,12 @@ class BaseModel:
     def get_predict_accuracy_on_test_data(self):
         prediction_from_test_data = self.train_model.predict(self.x_test)
         accuracy = metrics.accuracy_score(self.y_test, prediction_from_test_data)
-        print("Accuracy of our {1} on test data is: {0:0.4f}".format(accuracy, self.model_name))
+        return accuracy
 
     def get_predict_accuracy_on_train_data(self):
         prediction_from_train_data = self.train_model.predict(self.x_train)
         accuracy = metrics.accuracy_score(self.y_train, prediction_from_train_data)
-        print("Accuracy of our {1} on training data is: {0:0.4f}".format(accuracy, self.model_name))
-
+        return accuracy
 
 class NaiveBayesModel(BaseModel):
     def __init__(self, file_name=""):
