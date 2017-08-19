@@ -2,7 +2,9 @@ from model import NaiveBayesModel, RandomForestClassifierModel, LogisticRegressi
 
 nb = NaiveBayesModel('cleaned_data.csv')
 
-nb.get_predict_accuracy_on_test_data()
+print("accuracy of Naive Bayes Model: " + str(nb.get_predict_accuracy_on_test_data()))
+print(nb.get_confusion_metrics())
+print(nb.get_classification_report())
 nb.get_predict_accuracy_on_train_data()
 
 

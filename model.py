@@ -45,6 +45,15 @@ class BaseModel:
         accuracy = metrics.accuracy_score(self.y_train, prediction_from_train_data)
         return accuracy
 
+    def get_confusion_metrics(self):
+        prediction_from_test_data = self.train_model.predict(self.x_test)
+        return metrics.confusion_matrix(self.y_test, prediction_from_test_data, labels=[1, 0])
+
+    def get_classification_report(self):
+        prediction_from_test_data = self.train_model.predict(self.x_test)
+        return metrics.classification_report(self.y_test, prediction_from_test_data)
+
+
 class NaiveBayesModel(BaseModel):
     def __init__(self, file_name=""):
         naive_bayes = GaussianNB()
