@@ -27,6 +27,9 @@ class BaseModel:
         self.x_test = fill_zero.fit_transform(self.x_test)
         self.train_model.fit(self.x_train, self.y_train.ravel())
 
+        self.prediction_from_train_data = self.train_model.predict(self.x_train)
+        self.prediction_from_test_data = self.train_model.predict(self.x_test)
+
     def show_data_frame_status(self):
         print("{0:0.2f}% in training set".format((len(self.x_train) / len(self.data_frame.index)) * 100))
         print("{0:0.2f}% in test set".format((len(self.x_test) / len(self.data_frame.index)) * 100))
@@ -36,22 +39,18 @@ class BaseModel:
             print("#rows missing in {0} : {1}".format(column, len(self.data_frame.loc[self.data_frame[column] == 0])))
 
     def get_predict_accuracy_on_test_data(self):
-        prediction_from_test_data = self.train_model.predict(self.x_test)
-        accuracy = metrics.accuracy_score(self.y_test, prediction_from_test_data)
+        accuracy = metrics.accuracy_score(self.y_test, self.prediction_from_test_data)
         return accuracy
 
     def get_predict_accuracy_on_train_data(self):
-        prediction_from_train_data = self.train_model.predict(self.x_train)
-        accuracy = metrics.accuracy_score(self.y_train, prediction_from_train_data)
+        accuracy = metrics.accuracy_score(self.y_train, self.prediction_from_train_data)
         return accuracy
 
     def get_confusion_metrics(self):
-        prediction_from_test_data = self.train_model.predict(self.x_test)
-        return metrics.confusion_matrix(self.y_test, prediction_from_test_data, labels=[1, 0])
+        return metrics.confusion_matrix(self.y_test, self.prediction_from_test_data, labels=[1, 0])
 
     def get_classification_report(self):
-        prediction_from_test_data = self.train_model.predict(self.x_test)
-        return metrics.classification_report(self.y_test, prediction_from_test_data)
+        return metrics.classification_report(self.y_test, self.prediction_from_test_data)
 
 
 class NaiveBayesModel(BaseModel):
